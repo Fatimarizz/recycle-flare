@@ -119,11 +119,6 @@ const RecyclingProcessSection = () => {
                 {/* Content */}
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
-
-                {/* Connecting Line */}
-                {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 transform translate-x-4 z-0"></div>
-                )}
               </div>
             );
           })}
