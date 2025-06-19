@@ -36,7 +36,7 @@ const HeroSection = () => {
       <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Recycle <span className="text-green-200">Flare</span>
+            Flare <span className="text-green-200">Recycling</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-green-100 font-light">
             Sustain Today, Secure Tomorrow

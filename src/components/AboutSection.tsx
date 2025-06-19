@@ -9,10 +9,10 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              About <span className="text-green-600">Recycle Flare</span>
+              About <span className="text-green-600">Flare Recycling</span>
             </h2>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              At Recycle Flare, we're dedicated to creating a sustainable future through innovative 
+              At Flare Recycling, we're dedicated to creating a sustainable future through innovative 
               recycling solutions. Our mission is to transform waste into valuable resources while 
               protecting our environment for future generations.
             </p>
