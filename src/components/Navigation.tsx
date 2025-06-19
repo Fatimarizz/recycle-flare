@@ -38,7 +38,9 @@ const Navigation = () => {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="text-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 capitalize"
+                  className={` px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 capitalize ${
+                    isScrolled ? 'text-gray-700 hover:text-green-600 hover:bg-green-50' : 'text-white hover:text-white hover:bg-white/10'
+                  }`}
                 >
                   {item}
                 </button>
