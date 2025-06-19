@@ -29,7 +29,9 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-green-600">Recycle Flare</h1>
+            <h1 className={`text-2xl font-bold ${
+              isScrolled ? 'text-green-600' : 'text-gray-700'
+            }`}>Flare Recycling</h1>
           </div>
           
           <div className="hidden md:block">
@@ -38,7 +40,7 @@ const Navigation = () => {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 capitalize"
+                  className="text-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 capitalize"
                 >
                   {item}
                 </button>
