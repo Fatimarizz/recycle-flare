@@ -39,7 +39,7 @@ const Navigation = () => {
                   key={item}
                   onClick={() => scrollToSection(item)}
                   className={` px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 capitalize ${
-                    isScrolled ? 'text-gray-700 hover:text-green-600 hover:bg-green-50' : 'text-white hover:text-white hover:bg-white/10'
+                    isScrolled ? 'text-gray-700 hover:text-green-600 hover:bg-green-50' : 'text-green-600 hover:text-green-700  hover:bg-green-500/10'
                   }`}
                 >
                   {item}

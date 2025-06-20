@@ -1,219 +1,217 @@
-import React, { useEffect, useState } from 'react';
-import { ChevronDown, ArrowRight, Play, Star, Zap, TrendingUp } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Recycle, ArrowRight, CheckCircle, Globe, Package, Scissors, Zap, Leaf, Truck, Shield, TrendingUp } from 'lucide-react';
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const scrollToAbout = () => {
-    const element = document.getElementById('about');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section 
-      id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 pt-16 pb-12"
+      ref={heroRef}
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50"
     >
-      {/* Dynamic Background with Mouse Follow */}
-      <div 
-        className="absolute inset-0 transition-all duration-1000"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(34, 197, 94, 0.15), transparent 40%)`
-        }}
-      />
+      {/* Background Animation Effects */}
+      <div className="absolute inset-0">
+        {/* Animated Particles */}
+        <div className="absolute inset-0 opacity-20">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-green-400 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
 
-      {/* Animated Grid Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px'
-        }}></div>
+        {/* Floating Icons */}
+        <div className="absolute inset-0 opacity-5">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute text-green-400 animate-bounce"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            >
+              <Recycle className="w-6 h-6" />
+            </div>
+          ))}
+        </div>
+
+        {/* Gradient Orbs */}
+        <div 
+          className="absolute w-80 h-80 bg-gradient-to-r from-green-400/10 to-emerald-400/10 rounded-full blur-3xl animate-pulse"
+          style={{
+            left: `${mousePosition.x - 150}px`,
+            top: `${mousePosition.y - 150}px`,
+            transition: 'all 0.3s ease-out'
+          }}
+        />
+        <div className="absolute top-20 right-20 w-60 h-60 bg-emerald-400/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-green-400/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
       </div>
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-green-400 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Animated Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-green-600/10 via-transparent to-blue-600/10 animate-pulse"></div>
-
-      {/* Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          {/* Left Column - Main Content */}
-          <div className="text-center lg:text-left space-y-8">
-            {/* Animated Badge */}
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-full text-green-300 text-sm font-medium backdrop-blur-sm">
-              <Zap className="w-4 h-4 mr-2 animate-pulse" />
-              <span className="mr-2">🚀</span>
-              Leading Sustainable Solutions
-              <span className="ml-2">🌱</span>
-            </div>
-            
-            {/* Main Heading with Typing Effect */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                <span className="block">Transform</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 animate-pulse">
-                  Your Waste
-                </span>
-                <span className="block">Into Value</span>
-              </h1>
-              
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Professional recycling solutions that <span className="text-green-400 font-semibold">save money</span> and 
-                <span className="text-emerald-400 font-semibold"> protect the planet</span>
-              </p>
+      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-12 lg:py-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+          
+          {/* Left Side - Content */}
+          <div className={`transition-all duration-1000 order-1 lg:order-1 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            {/* Badge */}
+            <div className="inline-flex items-center px-3 sm:px-4 py-2 bg-green-100 border border-green-200 rounded-full text-green-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6 animate-pulse">
+              <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+              ♻️ Sustainable Waste Solutions
             </div>
 
-            {/* Interactive CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button 
-                onClick={scrollToAbout}
-                className="group relative bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl flex items-center justify-center overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center">
-                  Get Started
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {/* Main Heading */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+              Transform
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+                Waste into Value
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
+              Professional recycling services that turn your waste into valuable resources. 
+              Join the circular economy with our innovative solutions.
+            </p>
+
+            {/* Quick Features */}
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
+              {[
+                { icon: Package, text: "Paper & Cardboard", color: "text-blue-500" },
+                { icon: Scissors, text: "Plastic & Metal", color: "text-green-500" },
+                { icon: Zap, text: "Electronics", color: "text-purple-500" },
+                { icon: Leaf, text: "Organic Waste", color: "text-emerald-500" }
+              ].map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <div 
+                    key={index}
+                    className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-white/80 backdrop-blur-sm rounded-lg border border-gray-200/50 shadow-sm transition-all duration-300 hover:scale-105 ${
+                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <IconComponent className={`w-3 h-3 sm:w-4 sm:h-4 ${item.color}`} />
+                    <span className="text-gray-700 font-medium text-xs sm:text-sm">{item.text}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <button className="group bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold text-base sm:text-lg hover:from-green-700 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
+                <Recycle className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Start Recycling</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
-              
-              <button className="group bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 border border-white/20 transition-all duration-300 flex items-center justify-center hover:scale-105">
-                <Play className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform" />
-                Watch Demo
+              <button className="group bg-white/80 backdrop-blur-sm text-gray-700 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold text-base sm:text-lg border-2 border-gray-200 hover:bg-white hover:border-green-300 transform hover:scale-105 transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
+                <span>Learn More</span>
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
               </button>
-            </div>
-
-            {/* Animated Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
-              <div className="text-center group">
-                <div className="text-2xl sm:text-3xl font-bold text-green-400 group-hover:text-green-300 transition-colors">
-                  <span className="inline-block animate-bounce" style={{animationDelay: '0s'}}>5</span>
-                  <span className="inline-block animate-bounce" style={{animationDelay: '0.1s'}}>0</span>
-                  <span className="inline-block animate-bounce" style={{animationDelay: '0.2s'}}>0</span>
-                  <span className="inline-block animate-bounce" style={{animationDelay: '0.3s'}}>+</span>
-                </div>
-                <div className="text-sm text-gray-400">Businesses Served</div>
-              </div>
-              <div className="text-center group">
-                <div className="text-2xl sm:text-3xl font-bold text-emerald-400 group-hover:text-emerald-300 transition-colors">
-                  <span className="inline-block animate-pulse">9</span>
-                  <span className="inline-block animate-pulse" style={{animationDelay: '0.2s'}}>5</span>
-                  <span className="inline-block animate-pulse" style={{animationDelay: '0.4s'}}>%</span>
-                </div>
-                <div className="text-sm text-gray-400">Recycling Rate</div>
-              </div>
-              <div className="text-center group">
-                <div className="text-2xl sm:text-3xl font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors">
-                  <span className="inline-block animate-spin" style={{animationDuration: '2s'}}>2</span>
-                  <span className="inline-block animate-spin" style={{animationDuration: '2s', animationDelay: '0.5s'}}>4</span>
-                  <span className="inline-block animate-spin" style={{animationDuration: '2s', animationDelay: '1s'}}>/</span>
-                  <span className="inline-block animate-spin" style={{animationDuration: '2s', animationDelay: '1.5s'}}>7</span>
-                </div>
-                <div className="text-sm text-gray-400">Support Available</div>
-              </div>
             </div>
           </div>
 
-          {/* Right Column - Interactive Visual Element */}
-          <div className="relative hidden lg:block">
+          {/* Right Side - Visual Elements */}
+          <div className={`transition-all duration-1000 order-2 lg:order-2 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`} style={{transitionDelay: '200ms'}}>
             <div className="relative">
-              {/* Main Interactive Card */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-2xl hover:shadow-green-500/20 transition-all duration-500 transform hover:scale-105">
-                <div className="space-y-6">
-                  {/* Feature Cards with Hover Effects */}
-                  <div className="flex items-center space-x-4 p-4 rounded-2xl bg-gradient-to-r from-green-500/20 to-transparent hover:from-green-500/30 transition-all duration-300 transform hover:translate-x-2">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <Star className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-white font-semibold">Premium Service</h3>
-                      <p className="text-gray-300 text-sm">Top-tier recycling solutions</p>
-                    </div>
-                  </div>
+              {/* Main Visual Container */}
+              <div className="relative w-full max-w-lg mx-auto">
+                {/* Central Recycling Hub */}
+                <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 shadow-2xl animate-pulse relative">
+                  <Recycle className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 text-white animate-spin" style={{animationDuration: '8s'}} />
                   
-                  <div className="flex items-center space-x-4 p-4 rounded-2xl bg-gradient-to-r from-blue-500/20 to-transparent hover:from-blue-500/30 transition-all duration-300 transform hover:translate-x-2">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <TrendingUp className="w-6 h-6 text-white" />
+                  {/* Orbiting Elements */}
+                  <div className="absolute inset-0 animate-spin" style={{animationDuration: '12s'}}>
+                    <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                      <Package className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                     </div>
-                    <div>
-                      <h3 className="text-white font-semibold">Growing Impact</h3>
-                      <p className="text-gray-300 text-sm">Expanding nationwide reach</p>
+                    <div className="absolute top-1/2 -right-3 sm:-right-4 transform -translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                      <Scissors className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 p-4 rounded-2xl bg-gradient-to-r from-purple-500/20 to-transparent hover:from-purple-500/30 transition-all duration-300 transform hover:translate-x-2">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <Zap className="w-6 h-6 text-white" />
+                    <div className="absolute -bottom-3 sm:-bottom-4 left-1/2 transform -translate-x-1/2 w-6 h-6 sm:w-8 sm:h-8 bg-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                      <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                     </div>
-                    <div>
-                      <h3 className="text-white font-semibold">Lightning Fast</h3>
-                      <p className="text-gray-300 text-sm">Quick turnaround times</p>
+                    <div className="absolute top-1/2 -left-3 sm:-left-4 transform -translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                      <Leaf className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                     </div>
                   </div>
                 </div>
+
+                {/* Process Flow Lines */}
+                <div className="absolute top-0 left-0 w-full h-full">
+                  <svg className="w-full h-full" viewBox="0 0 300 300">
+                    <defs>
+                      <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#10b981" stopOpacity="0.1" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M150 50 Q200 100 250 150 Q200 200 150 250 Q100 200 50 150 Q100 100 150 50"
+                      fill="none"
+                      stroke="url(#flowGradient)"
+                      strokeWidth="2"
+                      strokeDasharray="5,5"
+                      className="animate-pulse"
+                    />
+                  </svg>
+                </div>
               </div>
-              
-              {/* Floating Elements with Mouse Interaction */}
-              <div 
-                className="absolute -top-6 -right-6 w-24 h-24 bg-green-500/30 rounded-full blur-xl animate-pulse"
-                style={{
-                  transform: `translate(${(mousePosition.x - window.innerWidth / 2) * 0.02}px, ${(mousePosition.y - window.innerHeight / 2) * 0.02}px)`
-                }}
-              ></div>
-              <div 
-                className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-500/30 rounded-full blur-xl animate-pulse delay-1000"
-                style={{
-                  transform: `translate(${(mousePosition.x - window.innerWidth / 2) * -0.02}px, ${(mousePosition.y - window.innerHeight / 2) * -0.02}px)`
-                }}
-              ></div>
-              
-              {/* Animated Border */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-green-500/50 via-transparent to-emerald-500/50 opacity-0 hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Enhanced Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center relative overflow-hidden">
-          <div className="w-1 h-3 bg-gradient-to-b from-green-400 to-emerald-400 rounded-full mt-2 animate-pulse"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent animate-pulse"></div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
 
-      {/* Corner Decorations */}
-      <div className="absolute top-20 left-10 w-20 h-20 border-l-2 border-t-2 border-green-400/30 rounded-tl-3xl"></div>
-      <div className="absolute top-20 right-10 w-20 h-20 border-r-2 border-t-2 border-emerald-400/30 rounded-tr-3xl"></div>
-      <div className="absolute bottom-20 left-10 w-20 h-20 border-l-2 border-b-2 border-cyan-400/30 rounded-bl-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-20 h-20 border-r-2 border-b-2 border-blue-400/30 rounded-br-3xl"></div>
+      {/* Decorative Elements */}
+      <div className="absolute top-10 left-10 w-20 h-20 bg-green-400/10 rounded-full animate-pulse"></div>
+      <div className="absolute top-20 right-20 w-16 h-16 bg-emerald-400/10 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+      <div className="absolute bottom-20 left-20 w-24 h-24 bg-green-400/10 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
     </section>
   );
 };

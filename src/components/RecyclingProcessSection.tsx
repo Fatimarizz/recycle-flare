@@ -124,62 +124,7 @@ const RecyclingProcessSection = () => {
           })}
         </div>
 
-        {/* Animated Visual Elements */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Paper Cutting Animation */}
-          <div className={`bg-white rounded-2xl p-6 shadow-lg border border-gray-200 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-          }`}>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Scissors className="w-8 h-8 text-white animate-pulse" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Paper Processing</h3>
-              <div className="space-y-2">
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-blue-500 rounded-full animate-pulse" style={{width: '60%'}}></div>
-                </div>
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-cyan-500 rounded-full animate-pulse" style={{width: '80%', animationDelay: '0.5s'}}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bag Opening Animation */}
-          <div className={`bg-white rounded-2xl p-6 shadow-lg border border-gray-200 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`} style={{transitionDelay: '200ms'}}>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Package className="w-8 h-8 text-white animate-bounce" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Bag Sorting</h3>
-              <div className="flex justify-center space-x-2">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
-                <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Recycling Machine Animation */}
-          <div className={`bg-white rounded-2xl p-6 shadow-lg border border-gray-200 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`} style={{transitionDelay: '400ms'}}>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Recycle className="w-8 h-8 text-white animate-spin" style={{animationDuration: '3s'}} />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Machine Processing</h3>
-              <div className="relative h-8 bg-gray-200 rounded-full overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" style={{animationDuration: '2s'}}></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         {/* CTA Section */}
         <div className={`mt-16 text-center transition-all duration-1000 ${
