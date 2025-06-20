@@ -93,7 +93,7 @@ const HeroSection = () => {
           {/* Left Side - Content */}
           <div className={`transition-all duration-1000 order-1 lg:order-1 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             {/* Badge */}
-            <div className="inline-flex items-center px-3 sm:px-4 mt-4 bg-green-100 border border-green-200 rounded-full text-green-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6 animate-pulse">
+            <div className="inline-flex items-center px-3 sm:px-4 mt-8 bg-green-100 border border-green-200 rounded-full text-green-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6 animate-pulse">
               <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
               ♻️ Sustainable Waste Solutions
             </div>
@@ -202,7 +202,7 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-2 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-0 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
         </div>
